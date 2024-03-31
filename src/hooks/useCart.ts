@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react"
 import { db } from "../data/db"
-import type { Guitar, cartItem } from "../types"
+import type { Guitar, cartItem } from "../types/index"
 
 export const useCart = () => {
 
@@ -20,9 +20,9 @@ export const useCart = () => {
       }, [cart])
 
     function addToCart(item : Guitar){
-        const itemExists = cart.findIndex(guitar => guitar.id == item.id)
+        const itemExists = cart.findIndex(guitar => guitar.id === item.id)
         if (itemExists < 0) {
-        const newItem = {...item, quantity: 1}
+        const newItem : cartItem = {...item, quantity : 1}
         setCart([...cart, newItem])
         }
         else {

@@ -1,4 +1,16 @@
-function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, cartTotal, isEmpty}) {
+import type { Guitar, cartItem } from "../types/index"
+type HeaderProps = {
+    cart: cartItem[];
+    removeFromCart: (id: Guitar['id']) => void
+    increaseQuantity: (id: Guitar['id']) => void
+    decreaseQuantity: (id: Guitar['id']) => void
+    clearCart: () => void
+    cartTotal: number
+    isEmpty: boolean
+}
+
+function Header({cart, removeFromCart, increaseQuantity, 
+    decreaseQuantity, clearCart, cartTotal, isEmpty} : HeaderProps ) {
 
   return (
     <div className="h-32 md:h-52">
