@@ -1,14 +1,15 @@
 import { useState, useMemo, useEffect } from "react"
 import { db } from "../data/db"
+import type { Guitar, cartItem } from "../types"
 
 export const useCart = () => {
 
-    const initialCart = () => {
+    const initialCart = () : cartItem[] => {
         const localStorageCart = localStorage.getItem('cart')
         return localStorageCart ? JSON.parse(localStorageCart) : []
     }
 
-    const [data, setData] = useState(db)
+    const [data] = useState(db)
     const [cart, setCart] = useState(initialCart)
 
     const MAX_ITEMS = 5;
@@ -18,11 +19,11 @@ export const useCart = () => {
         localStorage.setItem('cart', JSON.stringify(cart))
       }, [cart])
 
-    function addToCart(item){
+    function addToCart(item : Guitar){
         const itemExists = cart.findIndex(guitar => guitar.id == item.id)
         if (itemExists < 0) {
-        item.quantity = 1 
-        setCart([...cart, item])
+        const newItem = {...item, quantity: 1}
+        setCart([...cart, newItem])
         }
         else {
         if (cart[itemExists].quantity >= MAX_ITEMS) return
@@ -32,11 +33,11 @@ export const useCart = () => {
         }
     }
 
-    function removeFromCart(id){
+    function removeFromCart(id : Guitar['id']){
         setCart(prevBag => prevBag.filter(product => product.id !== id))
     }
 
-    function decreaseQuantity(id){
+    function decreaseQuantity(id : Guitar['id']){
         const updatedCart = cart.map(product => {
         if(product.id === id && product.quantity > MIN_ITEMS) {
             return {
@@ -48,7 +49,7 @@ export const useCart = () => {
         setCart(updatedCart)
     }
     
-    function increaseQuantity(id){
+    function increaseQuantity(id : Guitar['id']){
         const updatedCart = cart.map(product => {
         if(product.id === id && product.quantity < MAX_ITEMS) {
             return {
@@ -60,7 +61,7 @@ export const useCart = () => {
         setCart(updatedCart)
     }
 
-  function emptyCart(){
+  function clearCart(){
     setCart([])
   }
 
@@ -75,7 +76,7 @@ export const useCart = () => {
         removeFromCart,
         decreaseQuantity,
         increaseQuantity,
-        emptyCart,
+        clearCart,
         cartTotal,
         isEmpty
     }

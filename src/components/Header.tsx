@@ -1,4 +1,4 @@
-function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, emptyCart, cartTotal, isEmpty}) {
+function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, cartTotal, isEmpty}) {
 
   return (
     <div className="h-32 md:h-52">
@@ -66,7 +66,7 @@ function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, empty
 
                             <button 
                                 className="w-full py-4 bg-black text-white"
-                                onClick={emptyCart}
+                                onClick={clearCart}
                             >Vaciar Carrito</button>
 
                         </div>

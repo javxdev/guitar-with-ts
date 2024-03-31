@@ -6,7 +6,7 @@ import Header from "./components/Header"
 function App() {
 
   const { data, cart, addToCart, removeFromCart, decreaseQuantity, 
-          increaseQuantity, emptyCart, cartTotal, isEmpty } = useCart()
+          increaseQuantity, clearCart, cartTotal, isEmpty } = useCart()
 
   return (
     <>
@@ -15,7 +15,7 @@ function App() {
         removeFromCart={removeFromCart}
         increaseQuantity={increaseQuantity}
         decreaseQuantity={decreaseQuantity}
-        emptyCart={emptyCart}
+        clearCart={clearCart}
         cartTotal={cartTotal}
         isEmpty={isEmpty}
       />
